@@ -51,18 +51,42 @@ Let's delete the appropriate information from `usersContact`, `usersAddress` and
 
 1. INSERT two users:
 
+  INSERT INTO users
+      (first_name, last_name)
+  VALUES
+      ('test', 'user');
+
+12:34:32	INSERT INTO users       (first_name, last_name)   VALUES       ('test', 'user')	1 row(s) affected	0.046 sec
+
+
+  INSERT INTO users
+      (first_name, last_name)
+  VALUES
+      ('test2', 'user');
+
+12:35:37	INSERT INTO users       (first_name, last_name)   VALUES       ('test2', 'user')	1 row(s) affected	0.046 sec
+
+
 
 2. UPDATE all Ohio addresses to "REDACTED":
+
+13:00:07	UPDATE       usersAddress   SET       address = 'REDACTED AGAIN'   WHERE       state = 'OH'  -- SELECT * FROM usersAddress	22 row(s) affected Rows matched: 22  Changed: 22  Warnings: 0	0.047 sec
+
 
 3. All three DELETES
 
 * DELETE from usersContact
 
+14:11:12	DELETE FROM  usersContact WHERE  id = 114  -- SELECT * FROM usersAddress	1 row(s) affected	0.047 sec
+
 
 * DELETE from usersAddress
 
+14:11:49	DELETE FROM  usersAddress WHERE  id = 114  -- SELECT * FROM usersAddress	1 row(s) affected	0.047 sec
 
 * DELETE from users
+
+14:01:14	DELETE FROM  users WHERE  id = 114  -- SELECT * FROM usersAddress	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`admin`.`usersAddress`, CONSTRAINT `usersAddress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))	0.047 sec
 
 
 ## Summary
